@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -54,5 +55,26 @@ public class CustomerDaoTest {
         for (Customer customer : list) {
             System.out.println(customer);
         }
+    }
+
+    /**
+     * 数量
+     */
+    @Test
+    public void testCount() {
+        long count = customerDao.count();
+        boolean exists = customerDao.exists(5l);
+        System.out.println(exists);
+        System.out.println(count);
+    }
+
+    /**
+     * 根据id查询(延迟加载)
+     */
+    @Test
+    @Transactional
+    public void testGetOne() {
+        Customer customer = customerDao.getOne(2l);
+        System.out.println(customer);
     }
 }
